@@ -60,6 +60,11 @@ function App() {
   // }
 
   },[])
+
+  const removeEntry = (id) => {
+    const updatedProduct = products.filter(product => product.id !== id);
+    setProducts(updatedProduct);
+}
   
   // if(error){
   //   return <h1>Something went wrong!</h1>
