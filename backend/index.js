@@ -3,7 +3,6 @@ const axios = require('axios')
 
 const app = express();
 
-      
 app.get('/api/v1', (req, res)=>{
     const products = [
         {
@@ -84,6 +83,7 @@ app.get('/api/v1', (req, res)=>{
         res.send(filteredProducts);
         return;
     }
+    //setTime used to reflect as it is coming from cloud DB 
     setTimeout(()=>{
         res.send(products);
     },[3000])

@@ -19,7 +19,7 @@ const Component = styled(Box)`
     }
     & > div > table > tbody > tr > td {
         font-size: 16px;
-        color: #FFFFFF;
+        color: #F9F216;
     }
 `;
 
@@ -30,36 +30,36 @@ function App() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(false);
   const [loading,setLoading] = useState(false);
-  const [search, setSearch] = useState('');
+  // const [search, setSearch] = useState('');
 
   useEffect(()=>{
-    const controller = new AbortController(); // this is for Avoiding Race Condition  
+    // const controller = new AbortController(); // this is for Avoiding Race Condition  
     ;(async ()=>{
       try {
         setError(false);
         setLoading(true);
-        const response = await axios.get(`/api/v1?search=${search}`,{ signal:controller.signal }) 
-        setProducts(response.data);
-        console.log(response.data);
+        // const response = await axios.get(`/api/v1?search=${search}`,{ signal:controller.signal }) 
+        const response = await axios.get(`https://ynw0uyp123.execute-api.us-east-1.amazonaws.com/Dev`)
+        setProducts(JSON.parse(response.data.body).Items);
+        console.log(JSON.parse(response.data.body).Items);
         setLoading(false);
       } catch (err) {
 
-        if(axios.isCancel(err)){
-          console.log('Request cancelled', err.message)
-          return
-        }
-
+        // if(axios.isCancel(err)){
+        //   console.log('Request cancelled', err.message)
+        //   return
+        // }
         setError(true);
         console.log(err);
       }
   })()        
     
   //cleanup
-  return ()=>{
-    controller.abort();
-  }
+  // return ()=>{
+  //   controller.abort();
+  // }
 
-  },[search])
+  },[])
   
   // if(error){
   //   return <h1>Something went wrong!</h1>
@@ -71,7 +71,7 @@ function App() {
   return (
     <>
       <h1>API integration</h1>
-      <input type='text' onChange={(e)=> setSearch(e.target.value)} />
+      {/* <input type='text' onChange={(e)=> setSearch(e.target.value)} /> */}
       { error && (<h1>Something went wrong!</h1>)}
       { loading && (<h1>Loading...</h1>)}
       <p>No of Producst { products.length }</p>
