@@ -98,7 +98,7 @@ function App() {
                                     <TableCell>{product.description}</TableCell>
                                     <TableCell>{product.price}</TableCell>
                                     <TableCell>{product.category}</TableCell>
-                                    <TableCell><Button variant="contained" color="error" onClick={() => removeEntry(user.id)}>Remove</Button></TableCell>
+                                    <TableCell><Button variant="contained" color="error" onClick={() => removeEntry(product.id)}>Remove</Button></TableCell>
                                 </TableRow>
                             ))
                         }
